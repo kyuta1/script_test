@@ -6,7 +6,7 @@
 #
 #	Créer par François REINHORN
 #
-# V1.6
+# V1.8
 #
 # Licence GNU
 #
@@ -24,7 +24,7 @@ echo -e "${bleufonce}Application de test Machine et web${neutre}"
 
 # Affichage version et Licence
 
-echo -e "${bleufonce}V1.6${neutre}"
+echo -e "${bleufonce}V1.8${neutre}"
 echo -e "${bleufonce}Licence GNU${neutre}"
 echo -e "${bleufonce}Créer par François REINHORN${neutre}"
 
@@ -93,7 +93,32 @@ function test_machine
   printf "%b\n"
   mtr -r $service
   pause
-  menu
+  echo -e "Que souhaitez-vous faire?"
+  echo -e "1) Retour au menu principal 2) Refaire le test"
+  echo -n "Réponse : " && read choice
+  while true ; do
+  	case $choice in
+  #Affichage du menu
+  		0)
+  			menu
+  			;;
+  #Test Machine
+  		1)
+  			menu
+  			;;
+  #Test nom de domaine
+  		2)
+  			test_machine
+  			;;
+  		*)
+  			echo 'Mauvais choix ! Essayez encore !'
+  			pause
+  			choice=0
+  			clear
+  			;;
+  	esac
+
+  done
 }
 #Test web
 
@@ -176,12 +201,40 @@ function test_web
   printf "%b\n"
   dig TXT $service
   pause
-  menu
+  echo -e "Que souhaitez-vous faire?"
+  echo -e "1) Retour au menu principal 2) Refaire le test"
+  echo -n "Réponse : " && read choice
+  while true ; do
+  	case $choice in
+  #Affichage du menu
+  		0)
+  			menu
+  			;;
+  #Test Machine
+  		1)
+  			menu
+  			;;
+  #Test nom de domaine
+  		2)
+  			test_web
+  			;;
+  		*)
+  			echo 'Mauvais choix ! Essayez encore !'
+  			pause
+  			choice=0
+  			clear
+  			;;
+  	esac
+
+  done
 }
 
 # Check reverse DNS
 function test_reverse
  {
+   printf "%b\n"
+   echo -e "${bleuclair}Entrez le nom du service :${neutre}"
+   read -r service
    echo -e "Reverse de l'IP / Reverse of IP addres $service :"
    printf "%b\n"
 
@@ -191,11 +244,38 @@ function test_reverse
    printf "%b\n"
    dig -x $service
    pause
-   menu
-}
+   echo -e "Que souhaitez-vous faire?"
+   echo -e "1) Retour au menu principal 2) Refaire le test"
+   echo -n "Réponse : " && read choice
+   while true ; do
+   	case $choice in
+   #Affichage du menu
+   		0)
+   			menu
+   			;;
+   #Test Machine
+   		1)
+   			menu
+   			;;
+   #Test nom de domaine
+   		2)
+   			test_reverse
+   			;;
+   		*)
+   			echo 'Mauvais choix ! Essayez encore !'
+   			pause
+   			choice=0
+   			clear
+   			;;
+   	esac
+
+   done
+ }
 
 function note_version
 {
+clear
+banner
 cat script_test_version
 pause
 menu
