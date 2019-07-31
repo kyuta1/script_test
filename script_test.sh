@@ -10,6 +10,8 @@
 #
 # Licence GNU
 #
+# https://github.com/kyuta1/script_test
+#
 ##################################################
 
 # Variable Couleur
@@ -24,7 +26,7 @@ echo -e "${bleufonce}Application de test Machine et web${neutre}"
 
 # Affichage version et Licence
 
-echo -e "${bleufonce}V1.8${neutre}"
+echo -e "${bleufonce}V1.9${neutre}"
 echo -e "${bleufonce}Licence GNU${neutre}"
 echo -e "${bleufonce}Créer par François REINHORN${neutre}"
 
@@ -43,6 +45,43 @@ function menu
   printf "%b\n"
 	echo -e "Type de test?\n \n	1. Test machine\n	2. Test Web\n	3. Test Reverse\n	4. Note de version\n        5. Quitter\n"
 	echo -n "Réponse : " && read choice
+
+  while true ; do
+  	case $choice in
+  #Affichage du menu
+  		0)
+  			menu
+  			;;
+  #Test Machine
+  		1)
+  			test_machine
+  			;;
+  #Test nom de domaine
+  		2)
+  			test_web
+  			;;
+  #Test de Reverse
+  		3)
+  			test_reverse
+  			;;
+  #Note de version
+      4)
+        note_version
+        ;;
+  #Condition de sortie
+  		5)
+  			echo 'Sortie du programme !'
+  			break;;
+  		*)
+  			echo 'Mauvais choix ! Essayez encore !'
+  			pause
+  			choice=0
+  			clear
+  			;;
+  	esac
+
+  done
+
 }
 
 # Fonction test machine
@@ -313,39 +352,3 @@ function yes_no
 clear
 banner
 menu
-
-while true ; do
-	case $choice in
-#Affichage du menu
-		0)
-			menu
-			;;
-#Test Machine
-		1)
-			test_machine
-			;;
-#Test nom de domaine
-		2)
-			test_web
-			;;
-#Test de Reverse
-		3)
-			test_reverse
-			;;
-#Note de version
-    4)
-      note_version
-      ;;
-#Condition de sortie
-		5)
-			echo 'Sortie du programme !'
-			break;;
-		*)
-			echo 'Mauvais choix ! Essayez encore !'
-			pause
-			choice=0
-			clear
-			;;
-	esac
-
-done
